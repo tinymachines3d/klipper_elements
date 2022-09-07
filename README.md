@@ -1,4 +1,4 @@
-All new Klipper equipped machines will use the "elements" folder structure (as of 9/1/2022). Update manager will be linked to this repository. 
+As of September 1, 2022, all new Klipper equipped machines from Tiny Machines 3D will use the "elements" folder structure and update manager will be linked to this repository. 
 
 Thanks to Rob at A3DP! His hard work saved us a lot of time creating our custom configs/ folder structure for Klipper. 
 
