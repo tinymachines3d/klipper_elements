@@ -88,6 +88,18 @@ target_temp: 50.0
 max_speed: .7
 gcode_id: Chamber
 
+###
+
+[gcode_macro enclosurefan_on]
+gcode: 
+	SET_FAN_SPEED FAN=chamber_fan SPEED=1
+
+###			
+	
+[gcode_macro enclosurefan_off]
+gcode: 
+	SET_FAN_SPEED FAN=chamber_fan SPE
+
 #[output_pin FAN3]
 #pin: sx1509_duex:PIN_12
 #pwm: True
