@@ -1,0 +1,63 @@
+######################################################
+#################### Door Switch #####################
+######################################################
+
+[respond]
+default_type: echo
+
+[delayed_gcode clear_display]
+gcode:
+  M117 # clear display message
+
+#///////////////////////////door swith - button macros/////////////////////////////////////////////////
+[gcode_button door_switch]
+pin: ^PC14  # Connected to mainboard X endstop
+press_gcode: # door opened
+  {% if (printer.print_stats.state == "printing") %}  
+    door_open_state1 
+  {% else %}
+    M118 DOOR OPEN
+  {% endif %}
+  UPDATE_DELAYED_GCODE ID=set_dooropenbusy DURATION=2 
+
+release_gcode: # door closed after being open
+  ready_light
+  SET_GCODE_VARIABLE MACRO=door_open_state1 VARIABLE=dooropen VALUE=0
+  M118 DOOR CLOSED   
+  UPDATE_DELAYED_GCODE ID=clear_dooropenbusy DURATION=2
+  
+
+[gcode_macro door_open_state1]
+variable_dooropen: 0
+gcode: 
+  {% if dooropen == 0 %} # requires [virtual_sdcard]  
+      PAUSE # call printer pause macro
+      SET_GCODE_VARIABLE MACRO=door_open_state1 VARIABLE=dooropen VALUE=1
+      SIREN
+      M118 CLOSE DOOR THEN PRESS RESUME
+  {% else %}
+  {% endif %}
+
+[gcode_macro door_open_state2]
+gcode:
+  SIREN
+  M118 CLOSE DAMN DOOR THEN PRESS RESUME
+
+[gcode_macro ready_light]
+gcode:    
+  {% if dooropen == 0 %} # requires [virtual_sdcard] 
+  PartyTime
+  {% else %}
+  {% endif %}
+#**************************************************************************************************************
+
+[delayed_gcode clear_dooropenbusy]
+gcode:
+  SET_GCODE_VARIABLE MACRO=door_open_state1 VARIABLE=dooropen VALUE=0
+  M118 Clear Door Open busy!  
+
+
+[delayed_gcode set_dooropenbusy]
+gcode:
+  SET_GCODE_VARIABLE MACRO=door_open_state1 VARIABLE=dooropen VALUE=1
+  M118 Set Door Open busy! 
