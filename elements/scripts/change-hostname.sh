@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo /home/pi/klipper_config/elements/scripts/change-hostname-as-root.sh $1
+sudo /home/pi/printer_data/config/elements/scripts/change-hostname-as-root.sh $1
