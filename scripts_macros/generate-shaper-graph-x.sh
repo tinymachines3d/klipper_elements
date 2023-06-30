@@ -8,4 +8,4 @@ then
     chown biqu:biqu /home/biqu/printer_data/config/elements/input_shaping/input_shaper_results
 fi
 
-/home/biqu/klipper/scripts/calibrate_shaper.py $NEWY -o /home/biqu/printer_data/config/elements/input_shaping/input_shaper_results/shaper_calibrate_x_$DATE.png
+/home/biqu/klipper/scripts_macros/calibrate_shaper.py $NEWY -o /home/biqu/printer_data/config/elements/input_shaping/input_shaper_results/shaper_calibrate_x_$DATE.png
