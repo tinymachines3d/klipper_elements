@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo Change directory to ~/printer_data/config/elements
+# Change directory to /home/biqu/printer_data/config/elements
 cd /home/biqu/printer_data/config/elements
 
-echo Running git stash
+# Run git stash
 git stash
