@@ -1,16 +1,11 @@
-#!/bin/sh
-now=$(date +"%F-%H_%M_%S")
-# TEST_RESONANCES AXIS=X
-# TEST_RESONANCES AXIS=Y
+#!/bin/bash
 
-echo processing x-axis
-/home/pi/klipper/scripts/calibrate_shaper.py /tmp/calibration_data_x_*.csv -o /home/pi/klipper_config/elements/input_shaper_results/shaper_calibrate_x-${now}.png
+NEWY=$(ls -Art /tmp/calibration_data_x_*.csv | tail -n 1)
+DATE=$(date +'%Y-%m-%d-%H%M%S')
+if [ ! -d "/home/biqu/printer_data/config/elements/input_shaping/input_shaper_results" ]
+then
+    mkdir /home/biqu/printer_data/config/elements/input_shaping/input_shaper_results
+    chown biqu:biqu /home/biqu/printer_data/config/elements/input_shaping/input_shaper_results
+fi
 
-echo processing y-axis
-/home/pi/klipper/scripts/calibrate_shaper.py /tmp/resonances_y_*.csv -o /home/pi/klipper_config/elements/input_shaper_results/shaper_calibrate_y-${now}.png
-
-# TEST_RESONANCES AXIS=1,1 OUTPUT=raw_data
-# TEST_RESONANCES AXIS=1,-1 OUTPUT=raw_data
-# ~/klipper/scripts/graph_accelerometer.py -c /tmp/raw_data_axis*.csv -o /tmp/resonances.png
-mv /tmp/resonances_*.csv /home/pi/klipper_config/elements/input_shaper_results
-
+/home/biqu/klipper/scripts/calibrate_shaper.py $NEWY -o /home/biqu/printer_data/config/elements/input_shaping/input_shaper_results/shaper_calibrate_x_$DATE.png
