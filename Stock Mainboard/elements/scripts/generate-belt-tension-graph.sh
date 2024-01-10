@@ -6,7 +6,7 @@ set -e -u -o pipefail
 ## but this has been reliable for me so far...
 sleep 10
 
-outdir=/home/pi/klipper_config/elements/input_shaping/input_shaper_results
+outdir=/home/biqu/printer_data/config/elements/input_shaper_results
 if [ ! -d "${outdir}" ]; then
     mkdir "${outdir}"
 fi
